@@ -1,0 +1,25 @@
+name: auto-merge
+# プルリクエストが出たら自動マージを予約する。validate が通った時点で main に入る。
+# 人の確認を待ちたいときは、ラベル「人の確認」を付ける（付いている間は予約しない・予約を外す）。
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review, labeled, unlabeled]
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  auto-merge:
+    if: github.event.pull_request.head.repo.full_name == github.repository && !github.event.pull_request.draft
+    runs-on: ubuntu-latest
+    steps:
+      - name: 自動マージを予約する（ラベル「人の確認」があれば外す）
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ github.event.pull_request.html_url }}
+          HOLD: ${{ contains(github.event.pull_request.labels.*.name, '人の確認') }}
+        run: |
+          if [ "$HOLD" = "true" ]; then
+            gh pr merge --disable-auto "$PR" || true
+          else
+            gh pr merge --auto --merge "$PR"
+          fi
