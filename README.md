@@ -6,12 +6,12 @@
 
 ## 入れ方
 
-Claude（アプリ）では、カスタマイズ → プラグイン → マーケットプレイスを追加 で `kawano164/wine-ai-commons` を指定し、使うプラグインを入れます。非公開リポジトリなので、追加するときにGitHubアカウントをつなぎ、Claude GitHub Appにこのリポジトリへのアクセスを与えます。
+Claude（アプリ）では、カスタマイズ → プラグイン → マーケットプレイスを追加 で `winegrowers-commons/wine-ai-commons` を指定し、使うプラグインを入れます。非公開リポジトリなので、追加するときにGitHubアカウントをつなぎ、Claude GitHub Appにこのリポジトリへのアクセスを与えます。
 
 Claude Code では次の1行です。
 
 ```
-/plugin install core --marketplace kawano164/wine-ai-commons
+/plugin install core --marketplace winegrowers-commons/wine-ai-commons
 ```
 
 ## いま入っているもの
