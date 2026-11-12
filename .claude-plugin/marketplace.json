@@ -1,0 +1,14 @@
+{
+  "name": "wine-ai-commons",
+  "description": "ワイン生産者どうしで育てるClaudeの共有基盤",
+  "owner": {
+    "name": "wine-ai-commons 参加者"
+  },
+  "plugins": [
+    {
+      "name": "core",
+      "source": "./plugins/core",
+      "description": "基盤：基本ルール、人間向けの資料づくり、情報の構造の読み取り、図解"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+# このリポジトリで作業するときのルール
+
+このリポジトリは、複数のワイン生産者が共有するClaudeのプラグイン置き場。ここに入れたものは、参加者全員のClaudeに配られる。
+
+## 入れてはいけないもの
+
+- 事業データ（人名、金額、口座、住所、取引先名、Notion・DriveのURLやID）。例やテストにも実データを使わず、架空の値にする
+- 1つの事業者だけの事情。それは各自の🧭 AI設定ページか、自分だけのスキルに置く
+
+## 書き方
+
+- 人が読む文章（README、スキルの本文、docs）は `plugins/core/skills/writing-for-humans` に従う。図は `plugins/core/skills/diagram` に従う
+- スキルの中ではDBを論理名（例：`attendance`）で呼び、URLやIDは書かない
+- プラグインのID（`name`）は英語の小文字で、一度決めたら変えない。画面に出る名前（`displayName`）は日本語
+
+## 変え方
+
+- main に直接入れず、ブランチを切ってプルリクエストにする
+- 変更したら `claude plugin validate .` と `claude plugin validate ./plugins/<名前>` を通す
+- プラグインの中身を変えたら、そのプラグインの `plugin.json` の `version` を上げる（誤字などは3桁目、手順の改善は2桁目、使い方が変わるものは1桁目）
