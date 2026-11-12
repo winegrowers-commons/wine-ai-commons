@@ -18,7 +18,7 @@ Claude Code では次の1行です。
 
 | プラグイン | 中身 |
 | --- | --- |
-| core（基盤・必須） | 基本ルール（basic-rules）、人間向けの資料づくり（writing-for-humans）、情報の構造の読み取り（structure-reading）、図解（diagram） |
+| core（基盤・必須） | 基本ルール（basic-rules）、人に確認する線引き（when-to-ask）、人間向けの資料づくり（writing-for-humans）、情報の構造の読み取り（structure-reading）、図解（diagram） |
 
 畑・醸造・販売・経理・補助金などの分野別プラグインは、これから順に足します。
 
