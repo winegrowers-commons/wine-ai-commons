@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 470" width="680" height="470"><style>
+:root{--bg:#fff;--ink:#1f2328;--sub:#57606a;--line:#d0d7de;--soft:#f6f8fa;--a:#0969da;--a-bg:#ddf4ff;--ok:#1a7f37;--ok-bg:#dafbe1;--warn:#cf222e;--warn-bg:#ffebe9;--o:#9a6700;--o-bg:#fff8c5;--p:#8250df;--p-bg:#fbefff}
+@media (prefers-color-scheme:dark){:root{--bg:#191919;--ink:#e6edf3;--sub:#9da7b3;--line:#3d444d;--soft:#24282e;--a:#8cc8ff;--a-bg:#12324f;--ok:#7ee2a8;--ok-bg:#123d27;--warn:#ffa198;--warn-bg:#4a1d1c;--o:#f2cc60;--o-bg:#3d3110;--p:#d2a8ff;--p-bg:#33204f}}
+*{box-sizing:border-box}
+
+
+
+text{fill:var(--ink);font-family:-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+.t{font-size:14px;font-weight:700}.s{font-size:12.5px;fill:var(--sub)}.lab{font-size:12.5px;font-weight:700}
+.zone-ok{fill:var(--ok-bg);stroke:var(--ok);stroke-width:2}
+.box{fill:var(--bg);stroke:var(--line);stroke-width:1.5}
+.home{fill:var(--soft);stroke:var(--warn);stroke-width:2;stroke-dasharray:6 4}
+.a{stroke:var(--a);stroke-width:2.5;fill:none}.o{stroke:var(--o);stroke-width:2.5;fill:none}.p{stroke:var(--p);stroke-width:2.5;fill:none}.g{stroke:var(--sub);stroke-width:1.8;fill:none}
+.ta{fill:var(--a)}.to{fill:var(--o)}.tp{fill:var(--p)}.tw{fill:var(--warn)}.tok{fill:var(--ok)}
+ .bgrect{fill:var(--bg)}</style><rect class="bgrect" width="100%" height="100%"/>
+<defs>
+ <marker id="ma" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="ta"/></marker>
+ <marker id="mo" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="to"/></marker>
+ <marker id="mp" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="tp"/></marker>
+ <marker id="mg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0L10,5L0,10z" fill="#8c959f"/></marker>
+</defs>
+<rect x="8" y="8" width="664" height="150" rx="12" class="zone-ok"/>
+<text x="24" y="34" class="t tok">みんなで共有するところ</text>
+<rect x="24" y="46" width="350" height="98" rx="8" class="box"/>
+<text x="40" y="72" class="t">GitHub（共有の置き場）</text>
+<text x="40" y="96" class="s">スキル（AIへの作業手順書）</text>
+<text x="40" y="118" class="s">基本ルール・DBの設計図</text>
+<rect x="390" y="46" width="266" height="98" rx="8" class="box"/>
+<text x="406" y="72" class="t">知識用のNotion</text>
+<text x="406" y="96" class="s">資材・病害虫・参考文献など</text>
+<text x="406" y="118" class="s">人もAIも読み書きする</text>
+
+<line x1="90" y1="148" x2="90" y2="236" class="a" marker-end="url(#ma)"/>
+<text x="100" y="196" class="lab ta">配る</text><text x="100" y="214" class="s">自動で届く</text>
+<line x1="260" y1="240" x2="260" y2="148" class="o" marker-end="url(#mo)"/>
+<text x="270" y="196" class="lab to">改善提案</text><text x="270" y="214" class="s">データは抜いて送る</text>
+<line x1="520" y1="148" x2="520" y2="236" class="p" marker-start="url(#mp)" marker-end="url(#mp)"/>
+<text x="530" y="196" class="lab tp">知識の読み書き</text><text x="530" y="214" class="s">専用の入口を通る</text>
+
+<path d="M8,246 L8,240 L672,240 L672,246" fill="none" stroke="#8c959f" stroke-width="1.5"/>
+<text x="340" y="232" text-anchor="middle" class="s" style="display:none">.</text>
+<g>
+<rect x="8" y="252" width="324" height="210" rx="12" class="home"/>
+<text x="24" y="278" class="t">生産者Aの手元</text>
+<rect x="24" y="290" width="292" height="38" rx="7" class="box"/><text x="38" y="315" class="t">自分のClaude</text>
+<line x1="60" y1="330" x2="60" y2="346" class="g" marker-end="url(#mg)"/><text x="70" y="343" class="s">まず読む</text>
+<rect x="24" y="350" width="292" height="38" rx="7" class="box"/><text x="38" y="375" class="t">🧭 AI設定ページ</text><text x="168" y="375" class="s">どのDBを使うか</text>
+<line x1="60" y1="390" x2="60" y2="406" class="g" marker-end="url(#mg)"/><text x="70" y="403" class="s">つなぐ</text>
+<rect x="24" y="410" width="292" height="40" rx="7" class="box"/><text x="38" y="436" class="t">自分のデータ</text><text x="140" y="436" class="s">Notion・freee・Drive</text>
+</g>
+<g>
+<rect x="348" y="252" width="324" height="210" rx="12" class="home"/>
+<text x="364" y="278" class="t">生産者Bの手元</text>
+<rect x="364" y="290" width="292" height="38" rx="7" class="box"/><text x="378" y="315" class="t">自分のClaude</text>
+<line x1="400" y1="330" x2="400" y2="346" class="g" marker-end="url(#mg)"/><text x="410" y="343" class="s">まず読む</text>
+<rect x="364" y="350" width="292" height="38" rx="7" class="box"/><text x="378" y="375" class="t">🧭 AI設定ページ</text><text x="508" y="375" class="s">どのDBを使うか</text>
+<line x1="400" y1="390" x2="400" y2="406" class="g" marker-end="url(#mg)"/><text x="410" y="403" class="s">つなぐ</text>
+<rect x="364" y="410" width="292" height="40" rx="7" class="box"/><text x="378" y="436" class="t">自分のデータ</text><text x="480" y="436" class="s">Notion・freee・Drive</text>
+</g>
+</svg>
