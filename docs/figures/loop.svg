@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 430" width="680" height="430"><style>
+:root{--bg:#fff;--ink:#1f2328;--sub:#57606a;--line:#d0d7de;--soft:#f6f8fa;--a:#0969da;--a-bg:#ddf4ff;--ok:#1a7f37;--ok-bg:#dafbe1;--warn:#cf222e;--warn-bg:#ffebe9;--o:#9a6700;--o-bg:#fff8c5;--p:#8250df;--p-bg:#fbefff}
+@media (prefers-color-scheme:dark){:root{--bg:#191919;--ink:#e6edf3;--sub:#9da7b3;--line:#3d444d;--soft:#24282e;--a:#8cc8ff;--a-bg:#12324f;--ok:#7ee2a8;--ok-bg:#123d27;--warn:#ffa198;--warn-bg:#4a1d1c;--o:#f2cc60;--o-bg:#3d3110;--p:#d2a8ff;--p-bg:#33204f}}
+*{box-sizing:border-box}
+
+
+
+text{fill:var(--ink);font-family:-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+.t{font-size:14px;font-weight:700}.s{font-size:12.5px;fill:var(--sub)}.lab{font-size:12.5px;font-weight:700}
+.zone-ok{fill:var(--ok-bg);stroke:var(--ok);stroke-width:2}
+.box{fill:var(--bg);stroke:var(--line);stroke-width:1.5}
+.home{fill:var(--soft);stroke:var(--warn);stroke-width:2;stroke-dasharray:6 4}
+.a{stroke:var(--a);stroke-width:2.5;fill:none}.o{stroke:var(--o);stroke-width:2.5;fill:none}.p{stroke:var(--p);stroke-width:2.5;fill:none}.g{stroke:var(--sub);stroke-width:1.8;fill:none}
+.ta{fill:var(--a)}.to{fill:var(--o)}.tp{fill:var(--p)}.tw{fill:var(--warn)}.tok{fill:var(--ok)}
+.ring{stroke:#8c959f;stroke-width:2.5;fill:none} .bgrect{fill:var(--bg)}</style><rect class="bgrect" width="100%" height="100%"/>
+<defs><marker id="mr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#8c959f"/></marker></defs>
+
+<path d="M415,81 A200,144 0 0,1 493,122" class="ring" marker-end="url(#mr)"/>
+<path d="M540,225 A200,144 0 0,1 510,291" class="ring" marker-end="url(#mr)"/>
+<path d="M388,355 A200,144 0 0,1 292,355" class="ring" marker-end="url(#mr)"/>
+<path d="M170,291 A200,144 0 0,1 140,225" class="ring" marker-end="url(#mr)"/>
+<path d="M187,122 A200,144 0 0,1 242,90" class="ring" marker-end="url(#mr)"/>
+<rect x="248" y="44" width="184" height="54" rx="9" class="box"/>
+<text x="340" y="67" text-anchor="middle" class="t">① 気づいて記録</text>
+<text x="340" y="87" text-anchor="middle" class="s">使っている最中に（記録係）</text>
+<rect x="438" y="144" width="184" height="54" rx="9" class="box"/>
+<text x="530" y="167" text-anchor="middle" class="t">② 集めて送る</text>
+<text x="530" y="187" text-anchor="middle" class="s">週1・個人情報を抜く（運び係）</text>
+<rect x="366" y="304" width="184" height="54" rx="9" class="box"/>
+<text x="458" y="327" text-anchor="middle" class="t">③ 直し案を作る</text>
+<text x="458" y="347" text-anchor="middle" class="s">再発を防ぐテストも（整備係）</text>
+<rect x="130" y="304" width="184" height="54" rx="9" class="box"/>
+<text x="222" y="327" text-anchor="middle" class="t">④ 審査する</text>
+<text x="222" y="347" text-anchor="middle" class="s">ルールとテストで（審査係）</text>
+<rect x="58" y="144" width="184" height="54" rx="9" class="box"/>
+<text x="150" y="167" text-anchor="middle" class="t">⑤ 新しい版を配る</text>
+<text x="150" y="187" text-anchor="middle" class="s">全員に自動で届く（配布係）</text>
+<rect x="60" y="244" width="180" height="30" rx="15" fill="var(--warn-bg)" stroke="var(--warn)" stroke-width="1.5"/>
+<text x="150" y="264" text-anchor="middle" class="lab tw">大きな変更だけ人が承認</text>
+<text x="340" y="209" text-anchor="middle" class="t" style="font-size:16px">使うほど良くなる</text>
+<text x="340" y="231" text-anchor="middle" class="s">人がやるのは承認だけ</text>
+</svg>

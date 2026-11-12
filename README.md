@@ -2,7 +2,7 @@
 
 ワイン生産者どうしで育てる、Claudeの共有基盤です。スキル（AIへの作業手順書）、DBの設計図、基本ルールを、ここでみんなで共有して直していきます。各自の事業データはここには入れず、それぞれのNotion・freee・Google Driveに置いたままにします。
 
-全体の設計は Notion の「AIコモンズ｜全体設計」にあります。
+全体の設計は [docs/design.md](docs/design.md) にあります。
 
 ## 入れ方
 
@@ -18,7 +18,7 @@ Claude Code では次の1行です。
 
 | プラグイン | 中身 |
 | --- | --- |
-| core（基盤・必須） | 基本ルール（basic-rules）、人間向けの資料づくり（writing-for-humans）、情報の構造の読み取り（structure-reading）、図解（diagram） |
+| core（基盤・必須） | 基本ルール（basic-rules）、人に確認する線引き（when-to-ask）、人間向けの資料づくり（writing-for-humans）、情報の構造の読み取り（structure-reading）、図解（diagram） |
 
 畑・醸造・販売・経理・補助金などの分野別プラグインは、これから順に足します。
 
