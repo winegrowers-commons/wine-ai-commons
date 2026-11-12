@@ -2,7 +2,7 @@
 
 ワイン生産者どうしで育てる、Claudeの共有基盤です。スキル（AIへの作業手順書）、DBの設計図、基本ルールを、ここでみんなで共有して直していきます。各自の事業データはここには入れず、それぞれのNotion・freee・Google Driveに置いたままにします。
 
-はじめかたは [docs/getting-started.md](docs/getting-started.md)、全体の設計は [docs/design.md](docs/design.md) にあります。
+はじめかたは [docs/getting-started.md](docs/getting-started.md)、全体の設計は [docs/design.md](docs/design.md)、向かう方角は [docs/north-star.md](docs/north-star.md) にあります。
 
 ## 入れ方
 
