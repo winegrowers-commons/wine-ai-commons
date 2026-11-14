@@ -9,6 +9,11 @@
       "name": "core",
       "source": "./plugins/core",
       "description": "基盤：基本ルール、人に確認する線引き、提案のしかた、人間向けの資料づくり、情報の構造の読み取り、図解"
+    },
+    {
+      "name": "research",
+      "source": "./plugins/research",
+      "description": "調べる・確かめる：ポッドキャストの回の文字起こしと解説（podcast-notes）。科学調査などは順に足す"
     }
   ]
 }

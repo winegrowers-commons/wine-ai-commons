@@ -19,8 +19,11 @@ Claude Code では次の1行です。
 | プラグイン | 中身 |
 | --- | --- |
 | core（基盤・必須） | 基本ルール（basic-rules）、人に確認する線引き（when-to-ask）、人間向けの資料づくり（writing-for-humans）、情報の構造の読み取り（structure-reading）、図解（diagram） |
+| research（調べる・確かめる） | ポッドキャストの回の文字起こしと解説（podcast-notes）。文字起こしは共有のワークフロー（`.github/workflows/podcast-transcribe.yml`）を各自の非公開リポジトリから呼んで動かす |
 
 畑・醸造・販売・経理・補助金などの分野別プラグインは、これから順に足します。
+
+research を入れるときは、`/plugin install research --marketplace winegrowers-commons/wine-ai-commons`。
 
 ## 直し方
 

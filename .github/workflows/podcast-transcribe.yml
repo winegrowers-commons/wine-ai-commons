@@ -1,0 +1,172 @@
+# ポッドキャストの回を文字起こしする、呼び出して使うワークフロー。
+# 各自の非公開リポジトリに置いた短い呼び出しファイル
+# （plugins/research/skills/podcast-notes/references/caller.yml）から使う。
+# 結果は「呼び出した側」のリポジトリの episodes/ にコミットされる。
+# ここ（共有リポジトリ）には文字起こしを置かない（番組は著作物のため）。
+name: podcast-transcribe
+
+on:
+  workflow_call:
+    inputs:
+      url:
+        description: エピソードのURL（Pocket Casts / Apple Podcasts / 音声直リンク / その他ページ）
+        type: string
+        required: true
+      language:
+        description: 言語（auto / ja / en …）。auto はタイトルが日本語なら ja に固定
+        type: string
+        default: auto
+      model:
+        description: Whisperモデル
+        type: string
+        default: large-v3-turbo
+      chunk_min:
+        description: 並列処理の1チャンクの長さ（分）
+        type: string
+        default: "6"
+      request_id:
+        description: 依頼元の識別子（NotionページIDなど・任意）
+        type: string
+        default: ""
+      commons_ref:
+        description: 共有リポジトリのどの版のスクリプトを使うか
+        type: string
+        default: main
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      chunks: ${{ steps.split.outputs.chunks }}
+      language: ${{ steps.split.outputs.language }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: winegrowers-commons/wine-ai-commons
+          ref: ${{ inputs.commons_ref }}
+          path: _commons
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: 依存ツール
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg > /dev/null
+          pip install -q requests yt-dlp
+      - name: 音声URLを割り出す
+        env:
+          URL: ${{ inputs.url }}
+        run: |
+          python _commons/tools/podcast/resolve_audio.py "$URL" > meta.json
+          head -c 3000 meta.json
+      - name: ダウンロードと変換
+        env:
+          URL: ${{ inputs.url }}
+        run: |
+          if [ "$(jq -r '.ytdlp // false' meta.json)" = "true" ]; then
+            yt-dlp -x --audio-format mp3 -o "audio.%(ext)s" --no-playlist "$URL"
+            SRC=audio.mp3
+          else
+            curl -sSL --retry 3 -A "Mozilla/5.0" -o audio.src "$(jq -r .audio_url meta.json)"
+            SRC=audio.src
+          fi
+          ffmpeg -loglevel error -i "$SRC" -ac 1 -ar 16000 -c:a pcm_s16le audio16k.wav
+          ffprobe -v error -show_entries format=duration -of csv=p=0 audio16k.wav
+      - name: チャンク分割と言語の決定
+        id: split
+        env:
+          LANG_IN: ${{ inputs.language }}
+          MODEL: ${{ inputs.model }}
+          REQ: ${{ inputs.request_id }}
+          CHUNK_MIN: ${{ inputs.chunk_min }}
+        run: |
+          SEC=$(( CHUNK_MIN * 60 ))
+          mkdir -p chunks
+          ffmpeg -loglevel error -i audio16k.wav -f segment -segment_time $SEC -c copy chunks/c_%03d.wav
+          N=$(ls chunks | wc -l)
+          # auto のとき、タイトル・概要欄に日本語があれば ja に固定（チャンクごとの誤判定で英訳されるのを防ぐ）
+          if [ "$LANG_IN" = "auto" ] && jq -r '.title + .description' meta.json | grep -qP '[\x{3040}-\x{30ff}\x{4e00}-\x{9fff}]'; then LANG_IN=ja; fi
+          echo "language=$LANG_IN" >> "$GITHUB_OUTPUT"
+          echo "chunks=$(python3 -c "import json;print(json.dumps([{'i':i,'offset':i*$SEC} for i in range($N)]))")" >> "$GITHUB_OUTPUT"
+          jq --arg m "$MODEL" --arg r "$REQ" --argjson n $N '. + {model:$m, request_id:$r, chunks:$n}' meta.json > meta2.json && mv meta2.json meta.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: prepared
+          path: |
+            chunks/
+            meta.json
+          retention-days: 3
+
+  transcribe:
+    needs: prepare
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        chunk: ${{ fromJson(needs.prepare.outputs.chunks) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: winegrowers-commons/wine-ai-commons
+          ref: ${{ inputs.commons_ref }}
+          path: _commons
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: _commons/tools/podcast/requirements.txt
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-${{ inputs.model }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: prepared
+      - run: pip install -q -r _commons/tools/podcast/requirements.txt
+      - name: 文字起こし
+        env:
+          LANG_SEL: ${{ needs.prepare.outputs.language }}
+          MODEL: ${{ inputs.model }}
+        run: |
+          I=${{ matrix.chunk.i }}
+          python _commons/tools/podcast/transcribe_chunk.py "$(printf "chunks/c_%03d.wav" $I)" ${{ matrix.chunk.offset }} \
+            "part_$(printf %03d $I).json" --model "$MODEL" --language "$LANG_SEL"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: part-${{ matrix.chunk.i }}
+          path: part_*.json
+          retention-days: 3
+
+  merge:
+    needs: transcribe
+    runs-on: ubuntu-latest
+    concurrency:
+      group: commit-transcripts-${{ github.repository }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: winegrowers-commons/wine-ai-commons
+          ref: ${{ inputs.commons_ref }}
+          path: _commons
+      - uses: actions/download-artifact@v4
+        with:
+          name: prepared
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: part-*
+          path: parts
+      - name: まとめて保存
+        run: |
+          OUT=$(python _commons/tools/podcast/merge.py meta.json parts episodes)
+          echo "OUT=$OUT" >> "$GITHUB_ENV"
+          head -c 1500 "$OUT/transcript.md"
+      - name: コミット
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$OUT"
+          if git diff --cached --quiet; then echo "変更なし（同じ回をもう一度起こした）"; exit 0; fi
+          git commit -m "transcript: $(jq -r .title "$OUT/meta.json")"
+          for i in 1 2 3; do git pull --rebase -q && git push -q && break; sleep 5; done
+          echo "### 完了: \`$OUT\`" >> "$GITHUB_STEP_SUMMARY"
