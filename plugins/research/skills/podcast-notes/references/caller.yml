@@ -1,0 +1,29 @@
+# 各自の非公開リポジトリの .github/workflows/transcribe.yml に、このまま置く呼び出しファイル。
+# 中身の処理は共有リポジトリ（winegrowers-commons/wine-ai-commons）にあり、そちらが直れば自動で反映される。
+name: transcribe
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: エピソードのURL
+        required: true
+      language:
+        description: 言語（auto / ja / en …）
+        default: auto
+      request_id:
+        description: 依頼元の識別子（NotionページIDなど・任意）
+        default: ""
+
+run-name: "transcribe ${{ inputs.request_id || inputs.url }}"
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    uses: winegrowers-commons/wine-ai-commons/.github/workflows/podcast-transcribe.yml@main
+    with:
+      url: ${{ inputs.url }}
+      language: ${{ inputs.language }}
+      request_id: ${{ inputs.request_id }}

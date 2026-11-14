@@ -1,0 +1,6 @@
+{
+  "name": "research",
+  "displayName": "調べる・確かめる",
+  "version": "0.1.0",
+  "description": "調べもの・確かめもの。いまはポッドキャストの回の文字起こしと解説（podcast-notes）。科学調査・文献の登録・ファクトチェックは順に足す"
+}
