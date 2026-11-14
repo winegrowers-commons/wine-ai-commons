@@ -1,0 +1,6 @@
+{
+  "name": "finance",
+  "displayName": "経営",
+  "version": "0.1.0",
+  "description": "経営：資金繰りの見通し（cash-flow、Anthropic公式への上乗せ）、税務リスクの点検（tax-risk-review）"
+}

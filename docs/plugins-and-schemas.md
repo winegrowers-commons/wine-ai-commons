@@ -1,6 +1,6 @@
 # プラグインとDBの設計図
 
-[全体設計](design.md) の4章の詳細。プラグインごとの中身と、それぞれが使うDBの設計図をまとめる。いまリポジトリに入っているのは core だけで、ほかはこの表に沿って順に足す。
+[全体設計](design.md) の4章の詳細。プラグインごとの中身と、それぞれが使うDBの設計図をまとめる。いまは core・research・grape・finance・grants・team・equipment・labor が入っている（tank・bottle・accounting はまだ）。足りないスキルはこの表に沿って順に足す。作り方は core の making-skills（公式や公開のスキルを探し、足りない分だけ上乗せする）に従う。
 
 ## 1. プラグインごとの中身
 

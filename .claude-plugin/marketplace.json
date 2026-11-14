@@ -8,12 +8,42 @@
     {
       "name": "core",
       "source": "./plugins/core",
-      "description": "基盤：基本ルール、人に確認する線引き、提案のしかた、人間向けの資料づくり、情報の構造の読み取り、図解"
+      "description": "基盤：基本ルール、人に確認する線引き、提案のしかた、人間向けの資料づくり、情報の構造の読み取り、図解、スキルの作り方（公式への上乗せ）"
     },
     {
       "name": "research",
       "source": "./plugins/research",
-      "description": "調べる・確かめる：ポッドキャストの回の文字起こしと解説（podcast-notes）。科学調査などは順に足す"
+      "description": "調べる・確かめる：科学調査、総力調査、文献の登録・点検・照合、科学的な主張・論理の検証、誤りパターン、ページの総合検証、外国語資料の翻訳、ポッドキャストの解説"
+    },
+    {
+      "name": "grape",
+      "source": "./plugins/grape",
+      "description": "畑・栽培：防除の計画と記録の点検（spray-plan、海外の農業スキル集への上乗せ）、ビンテージの気象と総評（vintage-summary）"
+    },
+    {
+      "name": "finance",
+      "source": "./plugins/finance",
+      "description": "経営：資金繰りの見通し（cash-flow、Anthropic公式への上乗せ）、税務リスクの点検（tax-risk-review）"
+    },
+    {
+      "name": "grants",
+      "source": "./plugins/grants",
+      "description": "補助金・助成金：探す・見極める・申請書・交付後の追跡（grant-support、Anthropic公式への上乗せ）と制度カタログ"
+    },
+    {
+      "name": "team",
+      "source": "./plugins/team",
+      "description": "組織運営・話し合い：場づくりの問い（question-design）、理事会の議事録（board-minutes）"
+    },
+    {
+      "name": "equipment",
+      "source": "./plugins/equipment",
+      "description": "機械・設備・機器：取扱説明書からの整備項目と部品の登録（maintenance-setup）"
+    },
+    {
+      "name": "labor",
+      "source": "./plugins/labor",
+      "description": "人・労務：当月の出勤簿の予定（attendance-plan）、前月の給与支給記録（payroll-record）"
     }
   ]
 }

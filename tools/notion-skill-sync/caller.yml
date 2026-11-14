@@ -1,0 +1,25 @@
+# 各自の非公開リポジトリの .github/workflows/notion-skill-sync.yml に、このまま置く呼び出しファイル。
+# 中身の処理は共有リポジトリにあり、そちらが直れば自動で反映される。
+# 準備：リポジトリの Settings → Secrets に NOTION_TOKEN、Variables に SKILLS_DATA_SOURCE_ID を入れる。
+name: notion-skill-sync
+
+on:
+  schedule:
+    - cron: "17 18 * * 0" # 毎週月曜 3:17（日本時間）
+  workflow_dispatch:
+    inputs:
+      plugins:
+        description: 写すプラグイン（カンマ区切り、または all）
+        default: all
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    uses: winegrowers-commons/wine-ai-commons/.github/workflows/notion-skill-sync.yml@main
+    with:
+      skills_data_source_id: ${{ vars.SKILLS_DATA_SOURCE_ID }}
+      plugins: ${{ inputs.plugins || 'all' }}
+    secrets:
+      NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}

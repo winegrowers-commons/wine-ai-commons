@@ -1,0 +1,6 @@
+{
+  "name": "labor",
+  "displayName": "人・労務",
+  "version": "0.1.0",
+  "description": "人・労務：当月の出勤簿の予定（attendance-plan）、前月の給与支給記録（payroll-record）"
+}

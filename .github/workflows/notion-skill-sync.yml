@@ -1,0 +1,56 @@
+# コモンズのスキル（正本）を、各自の Notion のスキルDBへ写す、呼び出して使うワークフロー。
+# 各自の非公開リポジトリに置いた短い呼び出しファイル（tools/notion-skill-sync/caller.yml）から使う。
+# Notion の鍵は呼び出した側の secrets にあり、ここ（共有リポジトリ）には置かない。
+name: notion-skill-sync
+
+on:
+  workflow_call:
+    inputs:
+      skills_data_source_id:
+        description: 写し先のスキルDBのデータソースID
+        type: string
+        required: true
+      plugins:
+        description: 写すプラグイン（カンマ区切り、または all）
+        type: string
+        default: all
+      commons_ref:
+        description: 共有リポジトリのどの版を写すか
+        type: string
+        default: main
+    secrets:
+      NOTION_TOKEN:
+        required: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: 呼び出した側のリポジトリ（前回の控えの置き場）
+        uses: actions/checkout@v4
+      - name: 共有リポジトリ（スキルの正本）
+        uses: actions/checkout@v4
+        with:
+          repository: winegrowers-commons/wine-ai-commons
+          ref: ${{ inputs.commons_ref }}
+          path: .commons
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Notion のスキルDBへ写す
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          SKILLS_DATA_SOURCE_ID: ${{ inputs.skills_data_source_id }}
+          PLUGINS: ${{ inputs.plugins }}
+          COMMONS_DIR: .commons
+          STATE_FILE: .notion-skill-sync.json
+        run: python -I .commons/tools/notion-skill-sync/sync.py
+      - name: 控えを残す
+        run: |
+          git config user.name "notion-skill-sync"
+          git config user.email "notion-skill-sync@users.noreply.github.com"
+          git add .notion-skill-sync.json
+          git diff --cached --quiet || git commit -m "Notion のスキルDBへの写しを更新"
+          git push

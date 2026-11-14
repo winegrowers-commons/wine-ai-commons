@@ -1,0 +1,6 @@
+{
+  "name": "equipment",
+  "displayName": "機械・設備・機器",
+  "version": "0.1.0",
+  "description": "機械・設備・機器：取扱説明書からの整備項目と部品の登録（maintenance-setup）"
+}
