@@ -1,0 +1,6 @@
+{
+  "name": "grape",
+  "displayName": "畑・栽培",
+  "version": "0.1.0",
+  "description": "畑・栽培：防除の計画と記録の点検（spray-plan、海外の農業スキル集への上乗せ）、ビンテージの気象と総評（vintage-summary）"
+}
